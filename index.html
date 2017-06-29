@@ -46,6 +46,16 @@
         // create a built-in "sphere" shape; its constructor takes 4 params: name, subdivisions, radius, scene
         var sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, scene);
 
+        var box = BABYLON.Mesh.CreateBox("box", 2.0, scene);
+        var box2 = BABYLON.Mesh.CreateBox("box2", 2.0, scene);
+        var box3 = BABYLON.Mesh.CreateBox("box3", 2.0, scene);
+
+        box.position.x = -5
+        box2.position.x = -5
+        box2.position.z = 2
+        box3.position.x = -5
+        box3.position.z = 4
+
         var materialSphere1 = new BABYLON.StandardMaterial("texture1", scene)
 
         // move the sphere upward 1/2 of its height
