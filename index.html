@@ -41,7 +41,7 @@
         camera.attachControl(canvas, false);
 
         // create a basic light, aiming 0,1,0 - meaning, to the sky
-        var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,1,0), scene);
+        var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,5,0), scene);
 
         // create a built-in "sphere" shape; its constructor takes 4 params: name, subdivisions, radius, scene
         var sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, scene);
