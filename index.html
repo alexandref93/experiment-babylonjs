@@ -24,6 +24,8 @@
     <canvas id="renderCanvas"></canvas>
     <script>
 
+
+
       var phase = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -43,17 +45,23 @@
 
         var scene = new BABYLON.Scene(engine);
 
+        var listBox = []
+        var listSphere = []
+        var listGround = []
+
         scene.gravity = new BABYLON.Vector3(0, -9.81, 0);
 
         scene.enablePhysics();
 
         scene.collisionsEnabled = true;
-        
+
+        scene.actionManager = new BABYLON.ActionManager(scene);
+
         var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5,-10), scene);
 
         camera.setTarget(BABYLON.Vector3.Zero());
 
-        camera.attachControl(canvas, false);
+        // camera.attachControl(canvas, false);
 
         camera.checkCollisions = true;
 
@@ -66,6 +74,8 @@
               box.position.x = ic * -1
               box.position.z = index
               box.checkCollisions = true;
+              box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene)
+              listBox.push(box)
             }
 
             if (c === 2) {
@@ -75,6 +85,7 @@
               sphere.position.y = 5
               sphere.checkCollisions = true
               sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.5 }, scene);
+              listSphere.push(sphere)
             }
 
             if (c === 0) {
@@ -84,9 +95,31 @@
               ground.position.y = -0.7
               ground.checkCollisions = true;
               ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.PlaneImpostor, { mass: 0, restitution: 0.9 }, scene)
+              listGround.push(ground)
             }
           })
         })
+
+        scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyUpTrigger, function (evt) {
+
+           var sphere = listSphere[0]
+
+           if (evt.sourceEvent.key == "ArrowUp") {
+              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 0, 2), sphere.getAbsolutePosition())
+           }
+
+           if (evt.sourceEvent.key == "ArrowLeft") {
+              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(-2, 0, 0), sphere.getAbsolutePosition())
+           }
+
+           if (evt.sourceEvent.key == "ArrowRight") {
+              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(2, 0, 0), sphere.getAbsolutePosition())
+           }
+
+           if (evt.sourceEvent.key == "ArrowDown") {
+             sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 0, -2), sphere.getAbsolutePosition())
+           }
+        }));
 
         return scene;
       }
