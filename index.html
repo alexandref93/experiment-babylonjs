@@ -59,10 +59,6 @@
 
         camera.setTarget(BABYLON.Vector3.Zero());
 
-        // camera.attachControl(canvas, false);
-        //
-        // camera.checkCollisions = true;
-
         var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,5,0), scene);
 
         phase.map(function (row, index) {
@@ -144,6 +140,8 @@
         }
 
         camera.inputs.add(new FreeCameraInput())
+
+
 
 
 
