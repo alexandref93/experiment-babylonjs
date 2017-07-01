@@ -86,7 +86,7 @@
             }
 
             if (c === 0) {
-              var ground = BABYLON.Mesh.CreateGround('ground1', 2, 2, 1, scene);
+              var ground = BABYLON.Mesh.CreateGround('ground1', 1, 1, 1, scene);
               ground.position.x = ic * -1
               ground.position.z = index
               ground.position.y = -0.7
@@ -143,6 +143,19 @@
 
 
 
+        scene.registerBeforeRender(function () {
+
+          var sphere = listSphere[0]
+
+          listGround.map(function (ground) {
+            if (sphere.intersectsMesh(ground, false)) {
+              ground.material.diffuseColor = new BABYLON.Color3(1, 1, 1);
+            } else {
+              ground.material.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            }
+          })
+
+        })
 
 
 
