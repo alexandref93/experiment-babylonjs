@@ -85,7 +85,7 @@
               sphere.position.z = index
               sphere.position.y = 5
               sphere.checkCollisions = true
-              sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.5 }, scene);
+              sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 0.5, restitution: 0.2 }, scene);
               listSphere.push(sphere)
             }
 
