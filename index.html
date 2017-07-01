@@ -48,23 +48,16 @@
         scene.enablePhysics();
 
         scene.collisionsEnabled = true;
-
-        // create a FreeCamera, and set its position to (x:0, y:5, z:-10)
+        
         var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5,-10), scene);
 
-        // target the camera to scene origin
         camera.setTarget(BABYLON.Vector3.Zero());
 
-        // attach the camera to the canvas
         camera.attachControl(canvas, false);
 
         camera.checkCollisions = true;
 
-        // create a basic light, aiming 0,1,0 - meaning, to the sky
         var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,5,0), scene);
-
-        // create a built-in "sphere" shape; its constructor takes 4 params: name, subdivisions, radius, scene
-        // var sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, scene);
 
         phase.map(function (row, index) {
           row.map(function(c, ic) {
@@ -90,33 +83,11 @@
               ground.position.z = index
               ground.position.y = -0.7
               ground.checkCollisions = true;
-              ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene)
+              ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.PlaneImpostor, { mass: 0, restitution: 0.9 }, scene)
             }
           })
         })
 
-        // var box = BABYLON.Mesh.CreateBox("box", 2.0, scene);
-        // var box2 = BABYLON.Mesh.CreateBox("box2", 2.0, scene);
-        // var box3 = BABYLON.Mesh.CreateBox("box3", 2.0, scene);
-        //
-        // box.position.x = -5
-        // box2.position.x = -5
-        // box2.position.z = 2
-        // box3.position.x = -5
-        // box3.position.z = 4
-
-        // var materialSphere1 = new BABYLON.StandardMaterial("texture1", scene)
-
-        // move the sphere upward 1/2 of its height
-        // sphere.position.y = 1;
-        // sphere.material = materialSphere1
-
-        // materialSphere1.diffuseColor = new BABYLON.Color3(1.0, 3.0, 0.7);
-
-        // create a built-in "ground" shape; its constructor takes 5 params: name, width, height, subdivisions and scene
-        // var ground = BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene);
-
-        // return the created scene
         return scene;
       }
 
