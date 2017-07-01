@@ -43,6 +43,12 @@
 
         var scene = new BABYLON.Scene(engine);
 
+        scene.gravity = new BABYLON.Vector3(0, -9.81, 0);
+
+        scene.enablePhysics();
+
+        scene.collisionsEnabled = true;
+
         // create a FreeCamera, and set its position to (x:0, y:5, z:-10)
         var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5,-10), scene);
 
@@ -51,6 +57,8 @@
 
         // attach the camera to the canvas
         camera.attachControl(canvas, false);
+
+        camera.checkCollisions = true;
 
         // create a basic light, aiming 0,1,0 - meaning, to the sky
         var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,5,0), scene);
@@ -64,12 +72,16 @@
               var box = BABYLON.Mesh.CreateBox("box" + index + ic, 1.0, scene)
               box.position.x = ic * -1
               box.position.z = index
+              box.checkCollisions = true;
             }
 
             if (c === 2) {
               var sphere = BABYLON.Mesh.CreateSphere('sphere' + index + ic, 20, 2, scene)
               sphere.position.x = ic * -1
               sphere.position.z = index
+              sphere.position.y = 5
+              sphere.checkCollisions = true
+              sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.5 }, scene);
             }
 
             if (c === 0) {
@@ -77,6 +89,8 @@
               ground.position.x = ic * -1
               ground.position.z = index
               ground.position.y = -0.7
+              ground.checkCollisions = true;
+              ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene)
             }
           })
         })
