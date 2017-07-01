@@ -24,8 +24,6 @@
     <canvas id="renderCanvas"></canvas>
     <script>
 
-
-
       var phase = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -75,6 +73,9 @@
               box.position.z = index
               box.checkCollisions = true;
               box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene)
+              var materialBox = new BABYLON.StandardMaterial("textureBox", scene);
+              materialBox.diffuseColor = new BABYLON.Color3(2.0, 0.3, 0.7);
+              box.material = materialBox
               listBox.push(box)
             }
 
@@ -95,6 +96,9 @@
               ground.position.y = -0.7
               ground.checkCollisions = true;
               ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.PlaneImpostor, { mass: 0, restitution: 0.9 }, scene)
+              var materialGround = new BABYLON.StandardMaterial("textureGround", scene);
+              materialGround.diffuseColor = new BABYLON.Color3(0, 0, 0);
+              ground.material = materialGround
               listGround.push(ground)
             }
           })
@@ -140,6 +144,9 @@
         }
 
         camera.inputs.add(new FreeCameraInput())
+
+
+
 
         return scene;
 
