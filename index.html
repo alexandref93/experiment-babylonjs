@@ -100,24 +100,24 @@
           })
         })
 
-        scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyUpTrigger, function (evt) {
+        scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyDownTrigger, function (evt) {
 
            var sphere = listSphere[0]
 
            if (evt.sourceEvent.key == "ArrowUp") {
-              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 0, 2), sphere.getAbsolutePosition())
+              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 0, 0.5), sphere.getAbsolutePosition())
            }
 
            if (evt.sourceEvent.key == "ArrowLeft") {
-              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(-2, 0, 0), sphere.getAbsolutePosition())
+              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(-0.5, 0, 0), sphere.getAbsolutePosition())
            }
 
            if (evt.sourceEvent.key == "ArrowRight") {
-              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(2, 0, 0), sphere.getAbsolutePosition())
+              sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(0.5, 0, 0), sphere.getAbsolutePosition())
            }
 
            if (evt.sourceEvent.key == "ArrowDown") {
-             sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 0, -2), sphere.getAbsolutePosition())
+             sphere.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 0, -0.5), sphere.getAbsolutePosition())
            }
         }));
 
